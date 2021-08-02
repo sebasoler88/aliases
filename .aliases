@@ -1,25 +1,25 @@
 #!/bin/bash
 
+ALIAS_FILE=$HOME/aliases/.aliases
+
 # ADD ALIAS
 function aa {
-	aliasesFile=$HOME/.aliases
+	echo "alias $1='${@:2}'" >> $ALIAS_FILE
 	
-	echo "alias $1='${@:2}'" >> $aliasesFile
+	source $ALIAS_FILE
 	
-	source $aliasesFile
-	
-	tail -n 5 $aliasesFile
+	tail -n 5 $ALIAS_FILE
 }
 
-alias '?'='cat $HOME/.aliases'
-alias s='source $HOME/.aliases'
-alias ga='gedit $HOME/.aliases'
+alias '?'='cat $ALIAS_FILE'
+alias s='source $ALIAS_FILE'
+alias ga='gedit $ALIAS_FILE'
 
 alias c='clear'
 alias ai='_ apt-get install'
 alias au='_ apt-get update'
 alias a='_ apt-get'
-alias cdc='cd /home/sebasoler/code'
+alias cdc='cd $HOME/code'
 
 function port {
 	sudo netstat -nlp tcp | grep :$1
