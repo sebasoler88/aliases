@@ -16,11 +16,24 @@ alias s='source $ALIAS_FILE'
 alias ga='gedit $ALIAS_FILE'
 
 alias c='clear'
-alias ai='_ apt-get install'
-alias au='_ apt-get update'
 alias a='_ apt-get'
+alias ai='a install'
+alias au='a update'
+alias auu='au && a upgrade && a autoclean && a autoremove'
 alias cdc='cd $HOME/code'
 
 function port {
 	sudo netstat -nlp tcp | grep :$1
 }
+
+function cam {
+	sudo rmmod v4l2loopback_dc
+	sudo insmod /lib/modules/`uname -r`/kernel/drivers/media/video/v4l2loopback-dc.ko width=1920 height=1080
+	droidcam & scrcpy -S
+}
+
+alias dk='docker'
+alias dc='docker-compose'
+alias mm='cd /home/sebasoler/code/work/memmo'
+alias dev='yarn && yarn dev'
+alias staging-proxy='cloud_sql_proxy -instances=memmo-app:europe-west1:memmo-app=tcp:5435'
